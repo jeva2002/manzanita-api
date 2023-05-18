@@ -24,7 +24,7 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $productType = null;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class, orphanRemoval: true)]
     private Collection $products;
 
     public function __construct()
