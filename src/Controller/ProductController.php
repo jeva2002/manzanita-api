@@ -20,7 +20,6 @@ class ProductController extends AbstractController
     public function all_products(EntityManagerInterface $entityManager): Response
     {
         $products = $entityManager->getRepository(Product::class)->getProductsWithCategoryId();
-
         return $this->json(array_map(function ($product) {
             return $this->parse_product($product);
         }, $products));
@@ -32,7 +31,7 @@ class ProductController extends AbstractController
         return $this->json($this->parse_product($product));
     }
 
-    #[Route('/products/create', name: 'create_product', methods: ['POST', 'GET'])]
+    #[Route('/admin/products/create', name: 'create_product', methods: ['POST', 'GET'])]
     public function create_product(
         Request $request,
         EntityManagerInterface $entityManager,
@@ -47,7 +46,7 @@ class ProductController extends AbstractController
         return $this->json("Se ha creado un producto con el id {$product->getId()}");
     }
 
-    #[Route('/products/{id}/edit', name: 'update_product', methods: 'PUT')]
+    #[Route('/admin/products/{id}/edit', name: 'update_product', methods: 'PUT')]
     public function update_product(
         Product $product,
         Request $request,
@@ -62,7 +61,7 @@ class ProductController extends AbstractController
         return $this->json("Se ha actualizado un producto con el id {$product->getId()}");
     }
 
-    #[Route('/products/{id}/delete', name: 'delete_product', methods: 'DELETE')]
+    #[Route('/admin/products/{id}/delete', name: 'delete_product', methods: 'DELETE')]
     public function delete_product(Product $product, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($product);

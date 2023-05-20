@@ -28,7 +28,7 @@ class CategoryController extends AbstractController
         return $this->json($this->parse_category($category));
     }
 
-    #[Route('/categories/create', name: 'create_category', methods: 'POST')]
+    #[Route('/admin/categories/create', name: 'create_category', methods: 'POST')]
     public function create_category(
         Request $request,
         EntityManagerInterface $entityManager
@@ -40,7 +40,7 @@ class CategoryController extends AbstractController
         return $this->json("Se ha creado la categoría con el id {$category->getId()}");
     }
 
-    #[Route('/categories/{id}/edit', name: 'update_category', methods: 'PUT')]
+    #[Route('/admin/categories/{id}/edit', name: 'update_category', methods: 'PUT')]
     public function update_category(
         Category $category,
         Request $request,
@@ -50,7 +50,7 @@ class CategoryController extends AbstractController
         return $this->json("Se ha actualizado la categoría con el id {$category->getId()}");
     }
 
-    #[Route('/categories/{id}/delete', name: 'delete_category', methods: 'DELETE')]
+    #[Route('/admin/categories/{id}/delete', name: 'delete_category', methods: 'DELETE')]
     public function delete_category(Category $category, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($category);
